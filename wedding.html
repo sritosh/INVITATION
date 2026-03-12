@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Wedding QR Verification</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.card{
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    text-align:center;
+    width:350px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+.valid{
+    color:green;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.invalid{
+    color:red;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.id{
+    margin-top:10px;
+    color:#555;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Wedding Entry Check</h1>
+    <div id="result">Checking QR...</div>
+    <div class="id" id="guestid"></div>
+</div>
+
+<script>
+
+// list of valid QR IDs
+const validQR = ["INV001","INV002","INV003"];
+
+// read URL parameter
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+document.getElementById("guestid").innerHTML = "QR ID: " + id;
+
+if(validQR.includes(id)){
+    document.getElementById("result").innerHTML =
+    "<div class='valid'>✅ Valid Invitation<br>Welcome to the Wedding</div>";
+}else{
+    document.getElementById("result").innerHTML =
+    "<div class='invalid'>❌ Invalid QR Code<br>Entry Not Allowed</div>";
+}
+
+</script>
+
+</body>
+</html>
